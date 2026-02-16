@@ -1,0 +1,33 @@
+root = true
+
+[*]
+charset = utf-8
+indent_size = 2
+
+[*.cs]
+csharp_using_directive_placement = inside_namespace
+csharp_style_namespace_declarations = file_scoped
+
+csharp_prefer_braces = when_multiline
+csharp_style_expression_bodied_operators = when_on_single_line
+csharp_style_expression_bodied_methods = when_on_single_line
+
+dotnet_style_require_accessibility_modifiers = omit_if_default
+
+# CA1812: Avoid uninstantiated internal classes
+dotnet_diagnostic.CA1812.severity = none
+# CA1852: CA1852: Seal internal types
+dotnet_diagnostic.CA1852.severity = warning
+# CA2000: Dispose objects before losing scope
+dotnet_diagnostic.CA2000.severity = suggestion
+
+# CA2007: Consider calling ConfigureAwait on the awaited task
+dotnet_diagnostic.CA2007.severity = none
+
+# IDE0007: 'var' preferences (IDE0007 and IDE0008)
+# IDE0008: 'var' preferences (IDE0007 and IDE0008)
+dotnet_diagnostic.IDE0008.severity = none
+# IDE0010: Add missing cases to switch statement (IDE0010)
+dotnet_diagnostic.IDE0010.severity = none
+# IDE0130: Namespace does not match folder structure (IDE0130)
+dotnet_diagnostic.IDE0130.severity = none
