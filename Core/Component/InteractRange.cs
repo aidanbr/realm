@@ -2,7 +2,6 @@ namespace Core;
 
 using Godot;
 using System.Collections.Generic;
-using System.Linq;
 
 partial class InteractRange : Area3D
 {

@@ -11,7 +11,7 @@ public partial class Init : Node
   readonly Queue<int> _slots = new(MaxEntity);
   readonly bool[] _used = new bool[MaxEntity];
 
-  // player data
+  // player data & component
   (int ID, InteractRange interactRange) _player;
 
   // godot
@@ -21,12 +21,48 @@ public partial class Init : Node
   {
     Reset();
 
-    _player = InitPlayer();
+    // init zone
+    AddChild(Nodes.Zone());
+
+    // init player
+    _player = (
+      Add(new Entity { Type = EntityType.Player }),
+      Nodes.InteractRange()
+    );
+    Character character = Nodes.Character();
+    _active.Add(_player.ID, character);
+    character.AddChild(new Camera3D { Position = new Vector3 { X = 0, Y = 1, Z = 2 } });
+    character.AddChild(_player.interactRange);
+    AddChild(character);
   }
 
   public override void _Process(double delta)
   {
-    // player 
+    // loop
+    for (int i = 1; i < _entity.Length; ++i)
+    {
+      if (!Used(i)) continue;
+
+      switch (_entity[i].Type)
+      {
+        case EntityType.Player:
+          PlayerInput((float)delta);
+          break;
+        default:
+          continue;
+      }
+
+      // movement
+      if (_active.TryGetValue(i, out Character? node))
+      {
+        node.Position = _entity[i].Position;
+      }
+    }
+  }
+
+  void PlayerInput(float delta)
+  {
+    // player
     Vector2 v = Input.GetVector(Inputs.Left, Inputs.Right, Inputs.Forward, Inputs.Back);
 
     if (!v.IsZeroApprox())
@@ -41,38 +77,9 @@ public partial class Init : Node
 
       if (interact is not null)
       {
-        Log.Info($"Interacted with {interact.Id}");
+        Log.Info($"Interacted with {interact.ID}");
       }
     }
-
-    // loop
-    for (int i = 1; i < _entity.Length; ++i)
-    {
-      if (!Used(i)) continue;
-
-      // movement
-      if (_active.TryGetValue(i, out Character? node))
-      {
-        node.Position = _entity[i].Position;
-      }
-    }
-  }
-
-  (int, InteractRange) InitPlayer()
-  {
-    // data
-    int id = Add(new Entity { Type = EntityType.Player });
-
-    // godot
-    Character character = Nodes.Character();
-    character.AddChild(new Camera3D { Position = new Vector3 { X = 0, Y = 1, Z = 2} } );
-    InteractRange interactRange = Nodes.InteractRange();
-    character.AddChild(interactRange);
-    AddChild(character);
-
-    _active.Add(id, character);
-
-    return (id, interactRange);
   }
 
   void Reset()

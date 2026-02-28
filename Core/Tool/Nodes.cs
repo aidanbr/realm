@@ -11,6 +11,12 @@ static class Nodes
   internal static InteractRange InteractRange()
     => Create<InteractRange>("res://Node/Component/InteractRange.tscn");
 
+  internal static Zone Zone()
+    => Create<Zone>("res://Node/World/Zone.tscn");
+
+  internal static Interact Interact()
+  => Create<Interact>("res://Node/Component/Interact.tscn");
+
   static T Create<T>(string path) where T : Godot.Node
   {
     PackedScene node = ResourceLoader.Load<PackedScene>($"{path}") ??

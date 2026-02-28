@@ -6,7 +6,9 @@ enum EntityType
 {
   Unset = 0,
   Player = 1,
-  Item = 2,
+  Character = 2,
+  Monster = 3,
+  Item = 4,
 }
 
 class Entity

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://ducrvhn3ju3r3"]
+
+[ext_resource type="Script" uid="uid://dvruudmojkj6l" path="res://Core/World/Zone.cs" id="1_gsu8i"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gsu8i"]
+
+[node name="Zone" type="Node3D" unique_id=905493412]
+script = ExtResource("1_gsu8i")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1465614159]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+mesh = SubResource("PlaneMesh_gsu8i")

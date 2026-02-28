@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://f54tshv26ll3"]
 
-[ext_resource type="Script" uid="uid://bgkguau41qswn" path="res://Node/Component/Interact.cs" id="1_ncpp4"]
+[ext_resource type="Script" uid="uid://bgkguau41qswn" path="res://Core/Component/Interact.cs" id="1_ncpp4"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ncpp4"]
 
